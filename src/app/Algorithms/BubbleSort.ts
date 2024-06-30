@@ -15,10 +15,10 @@ export function bubbleSort(arr: number[],  n: number)
                 temp = arr[j];
                 arr[j] = arr[j + 1];
                 arr[j + 1] = temp;
-                swapped = true;
-            }
-            if(!swapped)
-            visuals.push(['compared', j, j+1]);
+                swapped = true;                             
+            }         
+            visuals.push(['compared', j, j+1]);    
+           
         }
         if (swapped == false)
         break;

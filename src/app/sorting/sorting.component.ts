@@ -18,7 +18,7 @@ export class SortingComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.arrSize = 20;
+    this.arrSize = 30;
     this.resetArray();
   }
   resetArray() {
