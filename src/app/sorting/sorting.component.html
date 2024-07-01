@@ -1,9 +1,12 @@
 <div class="container">
     <div class="d-flex align-icontent-center justify-content-center align-items-end my-5">
-        <div *ngFor="let ele of arr; index as i" [ngStyle]="{'height.px': ele}" style="background-color:'#33DDFF'; width: 5px; margin-left:2px;"
-             [ngClass]= "{'bar':1==1}"></div>
+        <div *ngFor="let ele of arr; index as i" [ngStyle]="{'height.px': ele}" style="background-color:'#33DDFF'; width: 40px; margin-left:2px;"
+             [ngClass]= "{'bar':1==1}">
+             {{ele}}
+            </div>
     </div>
 </div>
 
- <button (click)="OnSelectionSortClick()">Click me to Selection Sort</button>
- <button (click)="OnBubbleSortClick()">Click me to Bubble Sort</button>
+ <button (click)="OnSelectionSortClick()">Selection Sort</button>
+ <button (click)="OnBubbleSortClick()">Bubble Sort</button>
+ <button (click)="OnInsertionSortClick()">Insertion Sort</button>

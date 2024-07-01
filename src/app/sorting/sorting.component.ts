@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { bubbleSort } from 'app/Algorithms/BubbleSort';
+import { insertionSort } from 'app/Algorithms/InsertionSort';
 import { selectionSort } from 'app/Algorithms/Selection';
 
 @Component({
@@ -26,16 +27,23 @@ export class SortingComponent implements OnInit {
       this.arr.push(this.randomIntFromInterval(50, 400));
     }
   }
+
+  //Click Handlers
   OnSelectionSortClick() {
     this.selection();
   }
   OnBubbleSortClick() {
     this.Bubble();
   }
+
+  OnInsertionSortClick() {
+    this.Insertion();
+  }
   randomIntFromInterval(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
+  //Sorting Algos
   selection() {
     let visuals = [];
     let tempArr = this.arr.slice();
@@ -43,7 +51,25 @@ export class SortingComponent implements OnInit {
     visuals = selectionSort(tempArr, this.arrSize);
     this.DoAnimation(visuals);
   }
+  //Bubble Sort
+  Bubble() {
+    let visuals = [];
+    let tempArr = this.arr.slice();
 
+    visuals = bubbleSort(tempArr, this.arrSize);
+    this.DoAnimation(visuals);
+  }
+
+  //InsertionSort
+  Insertion() {
+    let visuals = [];
+    let tempArr = this.arr.slice();
+
+    visuals = insertionSort(tempArr, this.arrSize);
+    this.DoAnimation(visuals);
+  }
+
+  //Animations
   DoAnimation(visuals: any[][]) {
     for (let i = 0; i < visuals.length; i++) {
       const [act, first, second, firstHeight, secondHeight] =
@@ -66,19 +92,21 @@ export class SortingComponent implements OnInit {
           firstBar.style.backgroundColor = this.PRIMARY_COLOR;
           secondBar.style.backgroundColor = this.PRIMARY_COLOR;
 
+          firstBar.innerHTML = secondHeight;
+          secondBar.innerHTML = firstHeight;
+
           firstBar.style.height = `${secondHeight}px`;
           secondBar.style.height = `${firstHeight}px`;
         }, i * this.ANIMATION_SPEED_MS);
+      } else if (act == 'insert') {
+        setTimeout(() => {
+          firstBar.style.backgroundColor = this.PRIMARY_COLOR;
+          secondBar.style.backgroundColor = this.PRIMARY_COLOR;
+
+          firstBar.innerHTML = secondHeight;
+          firstBar.style.height = `${secondHeight}px`;
+        }, i * this.ANIMATION_SPEED_MS);
       }
     }
-  }
-
-  //Bubble Sort
-  Bubble() {
-    let visuals = [];
-    let tempArr = this.arr.slice();
-
-    visuals = bubbleSort(tempArr, this.arrSize);
-    this.DoAnimation(visuals);
   }
 }
