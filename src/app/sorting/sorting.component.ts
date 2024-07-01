@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { bubbleSort } from 'app/Algorithms/BubbleSort';
 import { insertionSort } from 'app/Algorithms/InsertionSort';
+import { mergeSort } from 'app/Algorithms/MergeSort';
 import { selectionSort } from 'app/Algorithms/Selection';
 
 @Component({
@@ -13,13 +14,13 @@ export class SortingComponent implements OnInit {
   arrSize: number = 0;
   PRIMARY_COLOR = '#33DDFF';
   SECONDRY_COLOR = '#CA33FF';
-  ANIMATION_SPEED_MS = 20;
+  ANIMATION_SPEED_MS = 10;
   arrayBars = document.getElementsByClassName('bar');
 
   constructor() {}
 
   ngOnInit(): void {
-    this.arrSize = 30;
+    this.arrSize = 60;
     this.resetArray();
   }
   resetArray() {
@@ -38,6 +39,10 @@ export class SortingComponent implements OnInit {
 
   OnInsertionSortClick() {
     this.Insertion();
+  }
+
+  OnMergeSortClick() {
+    this.Merge();
   }
   randomIntFromInterval(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -68,6 +73,15 @@ export class SortingComponent implements OnInit {
     visuals = insertionSort(tempArr, this.arrSize);
     this.DoAnimation(visuals);
   }
+  
+  //Merge Sort 
+  Merge()
+  {
+    let visuals:any[] = [];
+    let tempArr = this.arr.slice();
+    mergeSort(tempArr, 0, this.arrSize-1, visuals);
+    this.DoAnimation(visuals);
+  }
 
   //Animations
   DoAnimation(visuals: any[][]) {
@@ -92,8 +106,8 @@ export class SortingComponent implements OnInit {
           firstBar.style.backgroundColor = this.PRIMARY_COLOR;
           secondBar.style.backgroundColor = this.PRIMARY_COLOR;
 
-          firstBar.innerHTML = secondHeight;
-          secondBar.innerHTML = firstHeight;
+        //  firstBar.innerHTML = secondHeight;
+        //  secondBar.innerHTML = firstHeight;
 
           firstBar.style.height = `${secondHeight}px`;
           secondBar.style.height = `${firstHeight}px`;
@@ -103,7 +117,7 @@ export class SortingComponent implements OnInit {
           firstBar.style.backgroundColor = this.PRIMARY_COLOR;
           secondBar.style.backgroundColor = this.PRIMARY_COLOR;
 
-          firstBar.innerHTML = secondHeight;
+        //  firstBar.innerHTML = secondHeight;
           firstBar.style.height = `${secondHeight}px`;
         }, i * this.ANIMATION_SPEED_MS);
       }
